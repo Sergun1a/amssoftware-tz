@@ -1,0 +1,16 @@
+Список автомобилей, снятые с производства на сентябрь 2010 года. В формате Марка, Модель, Дата снятия с производства.
+
+SELECT brand.name, model.name, model.end_date 
+FROM model 
+left join brand on model.`brand_id` = brand.id
+WHERE end_date < '2010-09-01'
+
+
+Список автомобилей и работ, которые не сняты с производства на текущий момент, где стоимость выше 1000 рублей. В формате Марка, Модель, Наименование работ, Стоимость работ.
+
+SELECT brand.name, model.name, work.name, work.cost
+FROM model 
+left join brand on model.`brand_id` = brand.id
+right join work on model.id = work.model_id
+WHERE model.end_date > CURDATE() and work.cost>1000
+
